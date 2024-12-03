@@ -38,25 +38,25 @@ public class AccordionPanel {
         objMainPage.clickAccordionHeadingZero();
 
         //Первый пункт
-        objMainPage.clickAccordionHeadingTwo();
+        objMainPage.clickAccordionHeadingOne();
 
         //Второй пункт
-        objMainPage.clickAccordionHeadingThree();
+        objMainPage.clickAccordionHeadingTwo();
 
         //Третий пункт
-        objMainPage.clickAccordionHeadingFour();
+        objMainPage.clickAccordionHeadingThree();
 
         //Четвертый пункт
-        objMainPage.clickAccordionHeadingFive();
+        objMainPage.clickAccordionHeadingFour();
 
         //Пятый пункт
-        objMainPage.clickAccordionHeadingSix();
+        objMainPage.clickAccordionHeadingFive();
 
         //Шестой пункт
-        objMainPage.clickAccordionHeadingSeven();
+        objMainPage.clickAccordionHeadingSix();
 
         //Седьмой пункт
-        objMainPage.clickAccordionHeadingZero();
+        objMainPage.clickAccordionHeadingSeven();
 
     }
 
