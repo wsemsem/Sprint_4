@@ -1,4 +1,4 @@
-package PajeObject;
+package pajeObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 //Класс 2-го шага формы для заказа самоката
-public class RegistrationOrderStep2 {
+public class RegistrationOrderStepTwo {
 
     private WebDriver driver;
 
@@ -26,7 +26,7 @@ public class RegistrationOrderStep2 {
     //Кнопка "Заказать" 2-го шага
     private By orderButtonSecondStep = By.cssSelector("button[class='Button_Button__ra12g Button_Middle__1CSJM']");
 
-    public RegistrationOrderStep2(WebDriver driver) {
+    public RegistrationOrderStepTwo(WebDriver driver) {
         this.driver = driver;
     }
 

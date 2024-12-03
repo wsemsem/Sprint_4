@@ -1,11 +1,11 @@
-package PajeObject;
+package pajeObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 //Класс 1-го шага формы для заказа самоката
-public class RegistrationOrderStep1 {
+public class RegistrationOrderStepOne {
 
     private WebDriver driver;
 
@@ -27,7 +27,7 @@ public class RegistrationOrderStep1 {
     //Кнопка "Далее"
     private By nextStepButton = By.xpath(".//button[text()='Далее']");
 
-    public RegistrationOrderStep1(WebDriver driver) {
+    public RegistrationOrderStepOne(WebDriver driver) {
         this.driver = driver;
     }
 

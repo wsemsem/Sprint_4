@@ -1,7 +1,9 @@
-import PajeObject.MainPage;
-import PajeObject.PopUpWithStatus;
-import PajeObject.RegistrationOrderStep1;
-import PajeObject.RegistrationOrderStep2;
+import config.CommonMethods;
+import config.Constants;
+import pajeObject.MainPage;
+import pajeObject.PopUpWithStatus;
+import pajeObject.RegistrationOrderStepOne;
+import pajeObject.RegistrationOrderStepTwo;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +11,11 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+//Импорт для запуска полного теста в мозиле
+//import org.openqa.selenium.firefox.FirefoxDriver;
+//import org.openqa.selenium.firefox.FirefoxOptions;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -43,14 +50,18 @@ public class HeaderOrderButton {
     public void makeOrder() {
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
+//        FirefoxOptions options = new FirefoxOptions();
+//        driver = new FirefoxDriver(options);
 
         MainPage objMainPage = new MainPage(driver);
-        RegistrationOrderStep1 objRegistrationOrderStep1 = new RegistrationOrderStep1(driver);
-        RegistrationOrderStep2 objRegistrationOrderStep2 = new RegistrationOrderStep2(driver);
+        RegistrationOrderStepOne objRegistrationOrderStep1 = new RegistrationOrderStepOne(driver);
+        RegistrationOrderStepTwo objRegistrationOrderStep2 = new RegistrationOrderStepTwo(driver);
         PopUpWithStatus objPopUpWithStatus = new PopUpWithStatus(driver);
+        Constants constants = new Constants();
+        CommonMethods commonMethods = new CommonMethods();
 
 
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(constants.SITE_URL_ADDRESS);
         driver.manage().window().maximize();
 
         //Переход к форме для отправки заявки
@@ -73,12 +84,18 @@ public class HeaderOrderButton {
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//div[text()='Хотите оформить заказ?']"))));
 
-        //Кнопка "Да" не работает в Chrome, поэтому в этих кейсах жмём на "Нет"
-        objPopUpWithStatus.clickOnButtonNot();
+        //Нажатие на кнопку "Да" в поп-апе подтверждения заказа
+        objPopUpWithStatus.clickOnButtonYes();
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//div[text()='Заказ оформлен']"))));
+        //Нажатие на кнопку "Посмотреть статус" для перехода к странице заказа
+        objPopUpWithStatus.clickOnButtonCheckStatus();
     }
+
 
     @After
     public void teardown() {
         driver.quit();
     }
+
 }
