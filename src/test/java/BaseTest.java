@@ -19,15 +19,13 @@ public class BaseTest {
         FirefoxOptions options = new FirefoxOptions();
         driver = new FirefoxDriver(options);
 
-        Constants constants = new Constants();
-
-        driver.get(constants.SITE_URL_ADDRESS);
+        driver.get(config.Constants.SITE_URL_ADDRESS);
         driver.manage().window().maximize();
     }
 
-//    @After
-//    public void tearDown()
-//    {
-//        driver.quit();
-//    }
+    @After
+    public void tearDown()
+    {
+        driver.quit();
+    }
 }
