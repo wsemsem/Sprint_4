@@ -1,4 +1,4 @@
-package pajeObject;
+package pajeobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -1,29 +1,17 @@
-import config.Constants;
-import pajeObject.MainPage;
-import pajeObject.PopUpWithStatus;
-import pajeObject.RegistrationOrderStepOne;
-import pajeObject.RegistrationOrderStepTwo;
-import org.junit.After;
+import pajeobject.MainPage;
+import pajeobject.PopUpWithStatus;
+import pajeobject.RegistrationOrderStepOne;
+import pajeobject.RegistrationOrderStepTwo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
-//Импорт для запуска полного теста в мозиле
-//import org.openqa.selenium.firefox.FirefoxDriver;
-//import org.openqa.selenium.firefox.FirefoxOptions;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static config.Constants.*;
 
 @RunWith(Parameterized.class)
-public class MiddleOrderButton {
-
-    private WebDriver driver;
+public class MiddleOrderButton extends BaseTest {
 
     private final String name;
     private final String surename;
@@ -49,20 +37,11 @@ public class MiddleOrderButton {
 
     @Test
     public void makeOrder() {
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
-//        FirefoxOptions options = new FirefoxOptions();
-//        driver = new FirefoxDriver(options);
 
         MainPage objMainPage = new MainPage(driver);
         RegistrationOrderStepOne objRegistrationOrderStep1 = new RegistrationOrderStepOne(driver);
         RegistrationOrderStepTwo objRegistrationOrderStep2 = new RegistrationOrderStepTwo(driver);
         PopUpWithStatus objPopUpWithStatus = new PopUpWithStatus(driver);
-        Constants constants = new Constants();
-
-
-        driver.get(constants.SITE_URL_ADDRESS);
-        driver.manage().window().maximize();
 
         //Скролл до необходимой кнопки
         objMainPage.scrollToOrderButtonMiddle();
@@ -89,14 +68,11 @@ public class MiddleOrderButton {
 
         //Нажатие на кнопку "Да" в поп-апе подтверждения заказа
         objPopUpWithStatus.clickOnButtonYes();
+        System.out.println("Кнопка \"Да\" в поп-апе подтверждения заказа не кликабельна");
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//div[text()='Заказ оформлен']"))));
         //Нажатие на кнопку "Посмотреть статус" для перехода к странице заказа
         objPopUpWithStatus.clickOnButtonCheckStatus();
     }
 
-    @After
-    public void teardown() {
-        driver.quit();
-    }
 }
