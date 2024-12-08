@@ -60,8 +60,8 @@ public class MainPage {
         driver.findElement(By.xpath(".//div[contains(text(), '" + question + "')]")).click();
         new WebDriverWait(driver, 2)
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//p[contains(text(), '" + answer + "')]"))));
-        String actualText = driver.findElement(By.xpath(".//div[contains(text(), '" + question + "')]")).getText();
-        assertEquals(actualText, question);
+        String actualText = driver.findElement(By.xpath(".//div[contains(text(), '" + answer + "')]")).getText();
+        assertEquals(actualText, answer);
     }
 
 }
