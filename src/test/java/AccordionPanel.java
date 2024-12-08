@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageobject.MainPage;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,15 +41,16 @@ public class AccordionPanel extends BaseTest {
     //Раскрытие пунктов из раздела "Вопросы" и сравнение текста
     @Test
     public void checkAccordions() {
-        driver.findElement(By.xpath(".//button[@id='rcc-confirm-button']")).click();
-        WebElement element = driver.findElement(By.xpath(".//div[@class='Home_FourPart__1uthg']"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
 
+        MainPage objMainPage = new MainPage(driver);
 
-        driver.findElement(By.xpath(".//div[contains(text(), '" + questionText + "')]")).click();
-        new WebDriverWait(driver, 2)
-                .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//p[contains(text(), '" + waitingText + "')]"))));
-        String actualText = driver.findElement(By.xpath(".//p[contains(text(), '" + waitingText + "')]")).getText();
-        assertEquals(waitingText, actualText);
+        //Принятие куки
+        objMainPage.cookieAccept();
+
+        //Скролл до панели с FAQ
+        objMainPage.scrollToFaqPanel();
+
+        //Раскрытие пунктов FAQ и проверка текста ответов
+        objMainPage.faqPanelOpenAndCompare(questionText, waitingText);
     }
 }

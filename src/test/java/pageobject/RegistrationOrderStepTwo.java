@@ -1,9 +1,11 @@
-package pajeobject;
+package pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 //Класс 2-го шага формы для заказа самоката
 public class RegistrationOrderStepTwo {
@@ -25,6 +27,12 @@ public class RegistrationOrderStepTwo {
 
     //Кнопка "Заказать" 2-го шага
     private By orderButtonSecondStep = By.cssSelector("button[class='Button_Button__ra12g Button_Middle__1CSJM']");
+
+    //Поп-ап с уточнением "Хотите оформить заказ?"
+    private By sureToOrder = By.xpath(".//div[text()='Хотите оформить заказ?']");
+
+    //Заголовок "Заказ оформлен"
+    private By orderDone = By.xpath(".//div[text()='Заказ оформлен']");
 
     public RegistrationOrderStepTwo(WebDriver driver) {
         this.driver = driver;
@@ -61,6 +69,18 @@ public class RegistrationOrderStepTwo {
     //Метод нажатия на кнопку "Заказать"
     public void clickOrderButtonSecondStep() {
         driver.findElement(orderButtonSecondStep).click();
+    }
+
+    //Проверка видимости поп-апа с уточнением о заказе
+    public void checkOpinionToOrder() {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOf(driver.findElement(sureToOrder)));
+    }
+
+    //Проверка появления загловока "Заказ оформлен"
+    public void checkOrderStatus() {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOf(driver.findElement(orderDone)));
     }
 
 }

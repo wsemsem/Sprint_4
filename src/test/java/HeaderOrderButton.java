@@ -1,7 +1,7 @@
-import pajeobject.MainPage;
-import pajeobject.PopUpWithStatus;
-import pajeobject.RegistrationOrderStepOne;
-import pajeobject.RegistrationOrderStepTwo;
+import pageobject.MainPage;
+import pageobject.PopUpWithStatus;
+import pageobject.RegistrationOrderStepOne;
+import pageobject.RegistrationOrderStepTwo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -59,14 +59,15 @@ public class HeaderOrderButton extends BaseTest {
         objRegistrationOrderStep2.setBlackColorCheckbox();
         objRegistrationOrderStep2.setCommentsField("Что-то получается, но хочется бОльшего");
         objRegistrationOrderStep2.clickOrderButtonSecondStep();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//div[text()='Хотите оформить заказ?']"))));
 
+        //Отображение поп-ап'а
+        objRegistrationOrderStep2.checkOpinionToOrder();
         //Нажатие на кнопку "Да" в поп-апе подтверждения заказа
         objPopUpWithStatus.clickOnButtonYes();
-//        System.out.println("Кнопка \"Да\" в поп-апе подтверждения заказа не кликабельна");
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//div[text()='Заказ оформлен']"))));
+
+        //Проверка отображения поп-ап'а с заголовком "Заказ оформлен"
+        objRegistrationOrderStep2.checkOrderStatus();
+
         //Нажатие на кнопку "Посмотреть статус" для перехода к странице заказа
         objPopUpWithStatus.getOrderNumber();
         objPopUpWithStatus.clickOnButtonCheckStatus();
